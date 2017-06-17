@@ -39,7 +39,9 @@ class ColorPickerView: UIView {
 	private lazy var currentColorHexCodeLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
-
+		label.textAlignment = .center
+		label.font = UIFont.systemFont(ofSize: 18)
+		
 		return label
 	}()
 
@@ -77,11 +79,12 @@ class ColorPickerView: UIView {
 
 			currentColorView.leftAnchor.constraint(equalTo: colorImageView.leftAnchor),
 			currentColorView.topAnchor.constraint(equalTo: colorImageView.bottomAnchor, constant: 10),
+			currentColorView.rightAnchor.constraint(equalTo: colorImageView.rightAnchor),
 			currentColorView.heightAnchor.constraint(equalToConstant: 80),
-			currentColorView.widthAnchor.constraint(equalTo: currentColorView.heightAnchor),
 
-			currentColorHexCodeLabel.leftAnchor.constraint(equalTo: currentColorView.rightAnchor, constant: 10),
-			currentColorHexCodeLabel.topAnchor.constraint(equalTo: currentColorView.topAnchor),
+			currentColorHexCodeLabel.leftAnchor.constraint(equalTo: currentColorView.leftAnchor),
+			currentColorHexCodeLabel.rightAnchor.constraint(equalTo: currentColorView.rightAnchor),
+			currentColorHexCodeLabel.centerYAnchor.constraint(equalTo: currentColorView.centerYAnchor),
 
 			currentColorView.bottomAnchor.constraint(equalTo: bottomAnchor)
 			])

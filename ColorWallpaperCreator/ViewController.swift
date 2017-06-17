@@ -18,9 +18,11 @@ class ViewController: UIViewController {
 	}()
 
 	private lazy var saveColorButton: UIButton = {
-		let button = UIButton()
+		let button = UIButton(type: UIButtonType.system)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.setTitle("Save as Wallpaper", for: .normal)
+		button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+		button.tintColor = .white
 		button.backgroundColor = .lightGray
 		button.layer.cornerRadius = 15.0
 		button.addTarget(self, action: #selector(saveColorAsImage), for: .touchUpInside)
@@ -63,7 +65,7 @@ class ViewController: UIViewController {
 	}
 
 	func saveColorAsImage() {
-		UIGraphicsBeginImageContext(UIScreen.main.bounds.size)
+		UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, true, 0.0)
 
 		let context = UIGraphicsGetCurrentContext()
 		context?.setFillColor(colorPickerView.currentColor.cgColor)
@@ -77,14 +79,15 @@ class ViewController: UIViewController {
 	}
 
 	func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+		var alertController = UIAlertController()
+
 		if let error = error {
-			let ac = UIAlertController(title: "Error :(", message: error.localizedDescription, preferredStyle: .alert)
-			ac.addAction(UIAlertAction(title: "Dismiss", style: .default))
-			present(ac, animated: true)
+			alertController = UIAlertController(title: "Error :(", message: error.localizedDescription, preferredStyle: .alert)
 		} else {
-			let ac = UIAlertController(title: "Saved!", message: "Check your Photo Library to set this color as your wallpaper.", preferredStyle: .alert)
-			ac.addAction(UIAlertAction(title: "Dismiss", style: .default))
-			present(ac, animated: true)
+			alertController = UIAlertController(title: "Saved!", message: "Check your Photo Library to set this color as your wallpaper.", preferredStyle: .alert)
 		}
+
+		alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+		present(alertController, animated: true, completion: nil)
 	}
 }
