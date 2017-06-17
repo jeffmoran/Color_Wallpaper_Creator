@@ -41,7 +41,7 @@ class ColorPickerView: UIView {
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.textAlignment = .center
 		label.font = UIFont.systemFont(ofSize: 18)
-		
+
 		return label
 	}()
 
