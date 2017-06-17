@@ -88,6 +88,7 @@ class ViewController: UIViewController {
 		}
 
 		alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+		
 		present(alertController, animated: true, completion: nil)
 	}
 }
