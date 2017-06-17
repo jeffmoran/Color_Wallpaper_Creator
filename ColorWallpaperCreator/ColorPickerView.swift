@@ -104,10 +104,12 @@ class ColorPickerView: UIView {
 
 			if color.cgColor.alpha <= 0 { return }
 
-			currentColorView.backgroundColor = color
 			currentColorHexCodeLabel.text = color.hexString
-		case .ended:
-			colorSliderNub.center = point
+
+			UIView.animate(withDuration: 0.1, animations: {
+				self.currentColorView.backgroundColor = color
+				self.colorSliderNub.center = point
+			})
 		default: break
 		}
 	}
