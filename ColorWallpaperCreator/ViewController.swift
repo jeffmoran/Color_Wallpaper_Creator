@@ -13,6 +13,7 @@ class ViewController: UIViewController {
 	private lazy var colorPickerView: ColorPickerView = {
 		let view = ColorPickerView()
 		view.translatesAutoresizingMaskIntoConstraints = false
+		view.isExclusiveTouch = true
 
 		return view
 	}()
@@ -26,6 +27,7 @@ class ViewController: UIViewController {
 		button.backgroundColor = .lightGray
 		button.layer.cornerRadius = 15.0
 		button.addTarget(self, action: #selector(saveColorAsImage), for: .touchUpInside)
+		button.isExclusiveTouch = true
 
 		return button
 	}()
@@ -47,13 +49,13 @@ class ViewController: UIViewController {
 
 	func setUpConstraints() {
 		NSLayoutConstraint.activate([
-			colorPickerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-			colorPickerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+			colorPickerView.leftAnchor.constraint(equalTo: view.leftAnchor),
+			colorPickerView.rightAnchor.constraint(equalTo: view.rightAnchor),
 			colorPickerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
 			colorPickerView.bottomAnchor.constraint(equalTo: saveColorButton.topAnchor, constant: -10),
 
-			saveColorButton.leftAnchor.constraint(equalTo: colorPickerView.leftAnchor),
-			saveColorButton.rightAnchor.constraint(equalTo: colorPickerView.rightAnchor),
+			saveColorButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+			saveColorButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
 			saveColorButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
 			saveColorButton.heightAnchor.constraint(equalToConstant: 50)
 			])
@@ -88,7 +90,7 @@ class ViewController: UIViewController {
 		}
 
 		alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-		
+
 		present(alertController, animated: true, completion: nil)
 	}
 }

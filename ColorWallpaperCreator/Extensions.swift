@@ -40,4 +40,16 @@ extension UIColor {
 
 		return String(format: "#%02lX%02lX%02lX", lroundf(Float(r * 255)), lroundf(Float(g * 255)), lroundf(Float(b * 255)))
 	}
+
+	private func intensity() -> CGFloat {
+		var red: CGFloat = 255.0, green: CGFloat = 255.0, blue: CGFloat = 255.0, alpha: CGFloat = 1.0
+
+		getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
+		return (red * 0.299 + green * 0.587 + blue * 0.114)
+	}
+
+	func hexTextColor() -> UIColor {
+		return intensity() > 0.50 ? .black : .white
+	}
 }

@@ -32,6 +32,8 @@ class ColorPickerView: UIView {
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.layer.cornerRadius = 15.0
+		view.layer.borderColor = UIColor.lightGray.cgColor
+		view.layer.borderWidth = 1.0
 
 		return view
 	}()
@@ -77,9 +79,9 @@ class ColorPickerView: UIView {
 			colorSliderNub.heightAnchor.constraint(equalToConstant: 25),
 			colorSliderNub.widthAnchor.constraint(equalTo: colorSliderNub.heightAnchor),
 
-			currentColorView.leftAnchor.constraint(equalTo: colorImageView.leftAnchor),
+			currentColorView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
 			currentColorView.topAnchor.constraint(equalTo: colorImageView.bottomAnchor, constant: 10),
-			currentColorView.rightAnchor.constraint(equalTo: colorImageView.rightAnchor),
+			currentColorView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
 			currentColorView.heightAnchor.constraint(equalToConstant: 80),
 
 			currentColorHexCodeLabel.leftAnchor.constraint(equalTo: currentColorView.leftAnchor),
@@ -92,6 +94,8 @@ class ColorPickerView: UIView {
 
 	private func setUpGestures() {
 		let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler))
+		panGesture.maximumNumberOfTouches = 1
+
 		addGestureRecognizer(panGesture)
 	}
 
@@ -102,9 +106,10 @@ class ColorPickerView: UIView {
 		case .changed:
 			let color = colorImageView.layer.colorFromPoint(at: point)
 
-			if color.cgColor.alpha <= 0 { return }
+			if color.cgColor.alpha < 1 { return }
 
 			currentColorHexCodeLabel.text = color.hexString
+			currentColorHexCodeLabel.textColor = color.hexTextColor()
 
 			UIView.animate(withDuration: 0.1, animations: {
 				self.currentColorView.backgroundColor = color
