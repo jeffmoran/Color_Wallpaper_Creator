@@ -10,7 +10,6 @@ import UIKit
 
 extension CALayer {
 	func colorFromPoint(at point: CGPoint) -> UIColor {
-
 		var pixel: [CUnsignedChar] = [0, 0, 0, 0]
 
 		let colorSpace: CGColorSpace = CGColorSpaceCreateDeviceRGB()
@@ -24,9 +23,8 @@ extension CALayer {
 		let red: CGFloat = CGFloat(pixel[0]) / 255.0
 		let green: CGFloat = CGFloat(pixel[1]) / 255.0
 		let blue: CGFloat = CGFloat(pixel[2]) / 255.0
-		let alpha: CGFloat = CGFloat(pixel[3]) / 255.0
 
-		return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+		return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
 	}
 }
 

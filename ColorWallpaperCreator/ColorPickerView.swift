@@ -107,8 +107,6 @@ class ColorPickerView: UIView {
 
 		let color = colorImageView.layer.colorFromPoint(at: point)
 
-		if color.cgColor.alpha < 1 { return }
-
 		currentColorHexCodeLabel.text = color.hexString
 		currentColorHexCodeLabel.textColor = color.hexTextColor()
 
