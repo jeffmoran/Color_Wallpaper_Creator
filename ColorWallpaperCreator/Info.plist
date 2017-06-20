@@ -33,5 +33,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access is needed to save a color wallpaper to your Photo Library.</string>
 </dict>
 </plist>
