@@ -6,6 +6,5 @@ I like using solid colors as the wallpaper for my iPhone and switch them up as I
 <img src="/Screenshots/1.png" width="324px" height="576px" />
 
 ## Ideas
-* Recently saved colors
 * Color from HEX code
 * Gradient wallpapers

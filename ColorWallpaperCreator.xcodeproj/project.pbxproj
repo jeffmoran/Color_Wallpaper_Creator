@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A2795391EF8AB4800FE1240 /* RecentColorsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2795381EF8AB4800FE1240 /* RecentColorsCollectionViewController.swift */; };
+		8A27953C1EF8AD3900FE1240 /* RecentColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A27953B1EF8AD3900FE1240 /* RecentColorCollectionViewCell.swift */; };
+		8A27953F1EF8AF1500FE1240 /* RecentColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A27953E1EF8AF1500FE1240 /* RecentColor.swift */; };
 		8A46CFE91EF4A706001FD901 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A46CFE81EF4A706001FD901 /* ColorPickerView.swift */; };
 		8A46CFEB1EF4A718001FD901 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A46CFEA1EF4A718001FD901 /* Extensions.swift */; };
 		8A9F69951EF4A65A00EA5AAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9F69941EF4A65A00EA5AAA /* AppDelegate.swift */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A2795381EF8AB4800FE1240 /* RecentColorsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentColorsCollectionViewController.swift; sourceTree = "<group>"; };
+		8A27953B1EF8AD3900FE1240 /* RecentColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		8A27953E1EF8AF1500FE1240 /* RecentColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentColor.swift; sourceTree = "<group>"; };
 		8A46CFE81EF4A706001FD901 /* ColorPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		8A46CFEA1EF4A718001FD901 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8A9F69911EF4A65A00EA5AAA /* ColorWallpaperCreator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorWallpaperCreator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,10 +43,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A27953D1EF8AF0500FE1240 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8A27953E1EF8AF1500FE1240 /* RecentColor.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		8A46CFEE1EF4A850001FD901 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				8A9F69961EF4A65A00EA5AAA /* ViewController.swift */,
+				8A2795381EF8AB4800FE1240 /* RecentColorsCollectionViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -49,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				8A46CFE81EF4A706001FD901 /* ColorPickerView.swift */,
+				8A27953B1EF8AD3900FE1240 /* RecentColorCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -81,8 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				8A9F69941EF4A65A00EA5AAA /* AppDelegate.swift */,
-				8A46CFEE1EF4A850001FD901 /* Controllers */,
+				8A27953D1EF8AF0500FE1240 /* Model */,
 				8A46CFEF1EF4A85D001FD901 /* Views */,
+				8A46CFEE1EF4A850001FD901 /* Controllers */,
 				8A46CFF01EF4A862001FD901 /* Utilities */,
 				8A9F699B1EF4A65A00EA5AAA /* Assets.xcassets */,
 				8A9F699D1EF4A65A00EA5AAA /* LaunchScreen.storyboard */,
@@ -183,8 +200,11 @@
 			files = (
 				8A9F69971EF4A65A00EA5AAA /* ViewController.swift in Sources */,
 				8A9F69951EF4A65A00EA5AAA /* AppDelegate.swift in Sources */,
+				8A2795391EF8AB4800FE1240 /* RecentColorsCollectionViewController.swift in Sources */,
 				8A46CFE91EF4A706001FD901 /* ColorPickerView.swift in Sources */,
 				8A46CFEB1EF4A718001FD901 /* Extensions.swift in Sources */,
+				8A27953F1EF8AF1500FE1240 /* RecentColor.swift in Sources */,
+				8A27953C1EF8AD3900FE1240 /* RecentColorCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

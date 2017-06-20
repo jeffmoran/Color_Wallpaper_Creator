@@ -34,24 +34,24 @@ class ViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
 
 		view.backgroundColor = .white
 
 		addSubviews()
 		setUpConstraints()
+		setUpNavBar()
 	}
 
-	func addSubviews() {
+	private func addSubviews() {
 		view.addSubview(colorPickerView)
 		view.addSubview(saveColorButton)
 	}
 
-	func setUpConstraints() {
+	private func setUpConstraints() {
 		NSLayoutConstraint.activate([
 			colorPickerView.leftAnchor.constraint(equalTo: view.leftAnchor),
 			colorPickerView.rightAnchor.constraint(equalTo: view.rightAnchor),
-			colorPickerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+			colorPickerView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 20),
 			colorPickerView.bottomAnchor.constraint(equalTo: saveColorButton.topAnchor, constant: -10),
 
 			saveColorButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
@@ -61,9 +61,20 @@ class ViewController: UIViewController {
 			])
 	}
 
+	private func setUpNavBar() {
+		title = "Color Wallpaper Creator"
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Recent", style: .done, target: self, action: #selector(openRecentColors))
+	}
+
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
+	}
+
+	func openRecentColors() {
+		let navController = UINavigationController(rootViewController: RecentColorsCollectionViewController())
+		navController.modalPresentationStyle = .overCurrentContext
+		present(navController, animated: true, completion: nil)
 	}
 
 	func saveColorAsImage() {
@@ -80,6 +91,22 @@ class ViewController: UIViewController {
 		UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
 	}
 
+	private func saveRecentColor() {
+		let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as NSURL
+
+		let recentColor = RecentColor(color: colorPickerView.currentColor)
+
+		guard let path = url.appendingPathComponent("recentColors")?.path else { return }
+
+		if var recentColors = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? [RecentColor] {
+			recentColors.append(recentColor)
+
+			NSKeyedArchiver.archiveRootObject(recentColors, toFile: path)
+		} else {
+			NSKeyedArchiver.archiveRootObject([recentColor], toFile: path)
+		}
+	}
+
 	func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
 		var alertController = UIAlertController()
 
@@ -87,6 +114,7 @@ class ViewController: UIViewController {
 			alertController = UIAlertController(title: "Error :(", message: error.localizedDescription, preferredStyle: .alert)
 		} else {
 			alertController = UIAlertController(title: "Saved!", message: "Check your Photo Library to set this color as your wallpaper.", preferredStyle: .alert)
+			saveRecentColor()
 		}
 
 		alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
