@@ -51,7 +51,7 @@ class ViewController: UIViewController {
 		NSLayoutConstraint.activate([
 			colorPickerView.leftAnchor.constraint(equalTo: view.leftAnchor),
 			colorPickerView.rightAnchor.constraint(equalTo: view.rightAnchor),
-			colorPickerView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 20),
+			colorPickerView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
 			colorPickerView.bottomAnchor.constraint(equalTo: saveColorButton.topAnchor, constant: -10),
 
 			saveColorButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),

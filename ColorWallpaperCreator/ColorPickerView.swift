@@ -93,29 +93,29 @@ class ColorPickerView: UIView {
 	}
 
 	private func setUpGestures() {
-		let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler))
+		let panGesture = UIPanGestureRecognizer(target: self, action: #selector(gestureHandler))
 		panGesture.maximumNumberOfTouches = 1
 
+		let tapgesture = UITapGestureRecognizer(target: self, action: #selector(gestureHandler))
+
 		addGestureRecognizer(panGesture)
+		addGestureRecognizer(tapgesture)
 	}
 
-	func panGestureHandler(sender: UIPanGestureRecognizer) {
+	func gestureHandler(sender: UIGestureRecognizer) {
 		let point = sender.location(in: self)
 
-		switch sender.state {
-		case .changed:
-			let color = colorImageView.layer.colorFromPoint(at: point)
+		let color = colorImageView.layer.colorFromPoint(at: point)
 
-			if color.cgColor.alpha < 1 { return }
+		if color.cgColor.alpha < 1 { return }
 
-			currentColorHexCodeLabel.text = color.hexString
-			currentColorHexCodeLabel.textColor = color.hexTextColor()
+		currentColorHexCodeLabel.text = color.hexString
+		currentColorHexCodeLabel.textColor = color.hexTextColor()
 
-			UIView.animate(withDuration: 0.1, animations: {
-				self.currentColorView.backgroundColor = color
-				self.colorSliderNub.center = point
-			})
-		default: break
-		}
+		UIView.animate(withDuration: 0.1, animations: {
+			self.currentColorView.backgroundColor = color
+			self.colorSliderNub.center = point
+			self.colorSliderNub.layer.borderColor = color.hexTextColor().cgColor
+		})
 	}
 }
