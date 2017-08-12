@@ -1,5 +1,4 @@
 disabled_rules:
-- todo
 - line_length
 opt_in_rules:
 - force_unwrapping
@@ -10,7 +9,6 @@ opt_in_rules:
 - explicit_init
 - overridden_super_call
 - redundant_nil_coalesing
-- closure_spacing
 - nimble_operator
 - redundant_nil_coalescing
 - operator_usage_whitespace
@@ -24,5 +22,9 @@ opt_in_rules:
 - implicit_return
 - no_extension_access_modifier
 - multiline_parameters
+- let_var_whitespace
+- trailing_closure
+- unneeded_parentheses_in_closure_argument
+- vertical_parameter_alignment_on_call
 cyclomatic_complexity:
   ignores_case_statements: true

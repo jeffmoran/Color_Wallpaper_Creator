@@ -102,7 +102,7 @@ class ColorPickerView: UIView {
 		addGestureRecognizer(tapgesture)
 	}
 
-	func gestureHandler(sender: UIGestureRecognizer) {
+	@objc func gestureHandler(sender: UIGestureRecognizer) {
 		let point = sender.location(in: self)
 
 		let color = colorImageView.layer.colorFromPoint(at: point)
@@ -110,10 +110,10 @@ class ColorPickerView: UIView {
 		currentColorHexCodeLabel.text = color.hexString
 		currentColorHexCodeLabel.textColor = color.hexTextColor()
 
-		UIView.animate(withDuration: 0.1, animations: {
+		UIView.animate(withDuration: 0.1) {
 			self.currentColorView.backgroundColor = color
 			self.colorSliderNub.center = point
 			self.colorSliderNub.layer.borderColor = color.hexTextColor().cgColor
-		})
+		}
 	}
 }

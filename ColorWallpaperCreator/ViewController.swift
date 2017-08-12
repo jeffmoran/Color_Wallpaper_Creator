@@ -71,13 +71,13 @@ class ViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 
-	func openRecentColors() {
+	@objc func openRecentColors() {
 		let navController = UINavigationController(rootViewController: RecentColorsCollectionViewController())
 		navController.modalPresentationStyle = .overCurrentContext
 		present(navController, animated: true, completion: nil)
 	}
 
-	func saveColorAsImage() {
+	@objc func saveColorAsImage() {
 		UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, true, 0.0)
 
 		let context = UIGraphicsGetCurrentContext()
@@ -107,11 +107,11 @@ class ViewController: UIViewController {
 		}
 	}
 
-	func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+	@objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
 		var alertController = UIAlertController()
 
-		if let error = error {
-			alertController = UIAlertController(title: "Error :(", message: error.localizedDescription, preferredStyle: .alert)
+		if error != nil {
+			alertController = UIAlertController(title: "Error!", message: "Check your Photos permissions and try again.", preferredStyle: .alert)
 		} else {
 			alertController = UIAlertController(title: "Saved!", message: "Check your Photo Library to set this color as your wallpaper.", preferredStyle: .alert)
 			saveRecentColor()
