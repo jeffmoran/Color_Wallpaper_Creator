@@ -50,4 +50,18 @@ extension UIColor {
 	func hexTextColor() -> UIColor {
 		return intensity() > 0.50 ? .black : .white
 	}
+
+	func saveColorAsImage() -> UIImage? {
+		UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, true, 0.0)
+
+		let context = UIGraphicsGetCurrentContext()
+		context?.setFillColor(cgColor)
+		context?.fill(UIScreen.main.bounds)
+
+		guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+
+		UIGraphicsEndImageContext()
+
+		return image
+	}
 }

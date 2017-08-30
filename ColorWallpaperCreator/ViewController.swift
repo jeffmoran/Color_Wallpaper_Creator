@@ -78,33 +78,9 @@ class ViewController: UIViewController {
 	}
 
 	@objc func saveColorAsImage() {
-		UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, true, 0.0)
-
-		let context = UIGraphicsGetCurrentContext()
-		context?.setFillColor(colorPickerView.currentColor.cgColor)
-		context?.fill(UIScreen.main.bounds)
-
-		guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return }
-
-		UIGraphicsEndImageContext()
+		guard let image = colorPickerView.currentColor.saveColorAsImage() else { return }
 
 		UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
-	}
-
-	private func saveRecentColor() {
-		let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as NSURL
-
-		let recentColor = RecentColor(color: colorPickerView.currentColor)
-
-		guard let path = url.appendingPathComponent("recentColors")?.path else { return }
-
-		if var recentColors = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? [RecentColor] {
-			recentColors.append(recentColor)
-
-			NSKeyedArchiver.archiveRootObject(recentColors, toFile: path)
-		} else {
-			NSKeyedArchiver.archiveRootObject([recentColor], toFile: path)
-		}
 	}
 
 	@objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
@@ -114,7 +90,7 @@ class ViewController: UIViewController {
 			alertController = UIAlertController(title: "Error!", message: "Check your Photos permissions and try again.", preferredStyle: .alert)
 		} else {
 			alertController = UIAlertController(title: "Saved!", message: "Check your Photo Library to set this color as your wallpaper.", preferredStyle: .alert)
-			saveRecentColor()
+			RecentColor.saveRecentColor(colorPickerView.currentColor)
 		}
 
 		alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
