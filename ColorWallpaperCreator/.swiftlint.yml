@@ -7,7 +7,6 @@ opt_in_rules:
 - contains_over_first_not_nil
 - empty_count
 - explicit_init
-- explicit_type_interface
 - fatal_error_message
 - first_where
 - force_unwrapping
@@ -29,5 +28,16 @@ opt_in_rules:
 - unneeded_parentheses_in_closure_argument
 - vertical_parameter_alignment_on_call
 - vertical_whitespace
+- untyped_error_in_catch
+- unavailable_function
+- modifier_order
+- multiline_arguments
+- multiline_function_chains
+- empty_string
+- discouraged_optional_boolean
+- anyobject_protocol
+- function_default_parameter_at_end
+- private_action
+- sorted_first_last
 cyclomatic_complexity:
   ignores_case_statements: true

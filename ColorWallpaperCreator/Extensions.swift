@@ -30,13 +30,13 @@ extension CALayer {
 
 extension UIColor {
 	var hexString: String {
-		guard let colorRef = cgColor.components else { return "" }
+		guard let colorRef: [CGFloat] = cgColor.components else { return "" }
 
-		let r: CGFloat = colorRef[0]
-		let g: CGFloat = colorRef[1]
-		let b: CGFloat = colorRef[2]
+		let red: CGFloat = colorRef[0]
+		let green: CGFloat = colorRef[1]
+		let blue: CGFloat = colorRef[2]
 
-		return String(format: "#%02lX%02lX%02lX", lroundf(Float(r * 255)), lroundf(Float(g * 255)), lroundf(Float(b * 255)))
+		return String(format: "#%02lX%02lX%02lX", lroundf(Float(red * 255)), lroundf(Float(green * 255)), lroundf(Float(blue * 255)))
 	}
 
 	private func intensity() -> CGFloat {
@@ -54,11 +54,11 @@ extension UIColor {
 	func saveColorAsImage() -> UIImage? {
 		UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, true, 0.0)
 
-		let context = UIGraphicsGetCurrentContext()
+		let context: CGContext? = UIGraphicsGetCurrentContext()
 		context?.setFillColor(cgColor)
 		context?.fill(UIScreen.main.bounds)
 
-		guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+		guard let image: UIImage = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
 
 		UIGraphicsEndImageContext()
 
