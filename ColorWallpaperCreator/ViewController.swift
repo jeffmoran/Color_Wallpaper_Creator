@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 	}()
 
 	private lazy var saveColorButton: UIButton = {
-		let button = UIButton(type: UIButtonType.system)
+		let button = UIButton(type: .system)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.setTitle("Save as Wallpaper", for: .normal)
 		button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
@@ -51,12 +51,12 @@ class ViewController: UIViewController {
 		NSLayoutConstraint.activate([
 			colorPickerView.leftAnchor.constraint(equalTo: view.leftAnchor),
 			colorPickerView.rightAnchor.constraint(equalTo: view.rightAnchor),
-			colorPickerView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
+            colorPickerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
 			colorPickerView.bottomAnchor.constraint(equalTo: saveColorButton.topAnchor, constant: -10),
 
 			saveColorButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
 			saveColorButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-			saveColorButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
+            saveColorButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
 			saveColorButton.heightAnchor.constraint(equalToConstant: 50)
 			])
 	}
@@ -66,15 +66,10 @@ class ViewController: UIViewController {
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Recent", style: .done, target: self, action: #selector(openRecentColors))
 	}
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-
 	@objc func openRecentColors() {
 		let navController = UINavigationController(rootViewController: RecentColorsCollectionViewController())
-		navController.modalPresentationStyle = .overCurrentContext
-		present(navController, animated: true, completion: nil)
+
+        present(navController, animated: true, completion: nil)
 	}
 
 	@objc func saveColorAsImage() {

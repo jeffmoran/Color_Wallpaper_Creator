@@ -59,6 +59,7 @@ class ColorPickerView: UIView {
 		setUpGestures()
 	}
 
+    @available(*, unavailable)
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
@@ -96,10 +97,10 @@ class ColorPickerView: UIView {
 		let panGesture = UIPanGestureRecognizer(target: self, action: #selector(gestureHandler))
 		panGesture.maximumNumberOfTouches = 1
 
-		let tapgesture = UITapGestureRecognizer(target: self, action: #selector(gestureHandler))
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(gestureHandler))
 
 		addGestureRecognizer(panGesture)
-		addGestureRecognizer(tapgesture)
+		addGestureRecognizer(tapGesture)
 	}
 
 	@objc func gestureHandler(sender: UIGestureRecognizer) {
@@ -108,12 +109,12 @@ class ColorPickerView: UIView {
 		let color = colorImageView.layer.colorFromPoint(at: point)
 
 		currentColorHexCodeLabel.text = color.hexString
-		currentColorHexCodeLabel.textColor = color.hexTextColor()
+		currentColorHexCodeLabel.textColor = color.hexTextColor
 
 		UIView.animate(withDuration: 0.1) {
 			self.currentColorView.backgroundColor = color
 			self.colorSliderNub.center = point
-			self.colorSliderNub.layer.borderColor = color.hexTextColor().cgColor
+			self.colorSliderNub.layer.borderColor = color.hexTextColor.cgColor
 		}
 	}
 }

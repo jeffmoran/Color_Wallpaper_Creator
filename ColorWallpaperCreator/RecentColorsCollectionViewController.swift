@@ -21,6 +21,7 @@ class RecentColorsCollectionViewController: UICollectionViewController {
 		super.init(collectionViewLayout: layout)
 	}
 
+    @available(*, unavailable)
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
@@ -53,11 +54,6 @@ class RecentColorsCollectionViewController: UICollectionViewController {
 		blurEffectView.frame = view.bounds
 
 		view.insertSubview(blurEffectView, at: 0)
-	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 
 	@objc func close() {

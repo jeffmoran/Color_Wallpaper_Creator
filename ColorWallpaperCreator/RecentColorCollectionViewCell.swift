@@ -13,7 +13,7 @@ class RecentColorCollectionViewCell: UICollectionViewCell {
 		didSet {
 			backgroundColor = recentColor ?? .white
 			hexColorCodeLabel.text = recentColor?.hexString
-			hexColorCodeLabel.textColor = recentColor?.hexTextColor()
+			hexColorCodeLabel.textColor = recentColor?.hexTextColor
 		}
 	}
 
@@ -37,6 +37,7 @@ class RecentColorCollectionViewCell: UICollectionViewCell {
 		setUpConstraints()
 	}
 
+    @available(*, unavailable)
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
