@@ -50,6 +50,6 @@ class RecentColorCollectionViewCell: UICollectionViewCell {
 		NSLayoutConstraint.activate([
 			hexColorCodeLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
 			hexColorCodeLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
-			])
+		])
 	}
 }

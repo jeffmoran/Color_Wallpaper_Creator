@@ -90,7 +90,7 @@ class ColorPickerView: UIView {
 			currentColorHexCodeLabel.centerYAnchor.constraint(equalTo: currentColorView.centerYAnchor),
 
 			currentColorView.bottomAnchor.constraint(equalTo: bottomAnchor)
-			])
+		])
 	}
 
 	private func setUpGestures() {

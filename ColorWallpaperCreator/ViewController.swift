@@ -51,14 +51,14 @@ class ViewController: UIViewController {
 		NSLayoutConstraint.activate([
 			colorPickerView.leftAnchor.constraint(equalTo: view.leftAnchor),
 			colorPickerView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            colorPickerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+			colorPickerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
 			colorPickerView.bottomAnchor.constraint(equalTo: saveColorButton.topAnchor, constant: -10),
 
 			saveColorButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
 			saveColorButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            saveColorButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+			saveColorButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
 			saveColorButton.heightAnchor.constraint(equalToConstant: 50)
-			])
+		])
 	}
 
 	private func setUpNavBar() {
@@ -81,12 +81,20 @@ class ViewController: UIViewController {
 	@objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
 		var alertController = UIAlertController()
 
+        let title: String
+        let message: String
+
 		if error != nil {
-			alertController = UIAlertController(title: "Error!", message: "Check your Photos permissions and try again.", preferredStyle: .alert)
+			title = "Error!"
+            message = "Check your Photos permissions and try again."
 		} else {
-			alertController = UIAlertController(title: "Saved!", message: "Check your Photo Library to set this color as your wallpaper.", preferredStyle: .alert)
-			RecentColor.saveRecentColor(colorPickerView.currentColor)
+			title = "Saved!"
+            message = "Check your Photo Library to set this color as your wallpaper."
+
+			RecentColor.save(colorPickerView.currentColor)
 		}
+
+        alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
 		alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
 

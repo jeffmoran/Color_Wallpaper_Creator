@@ -13,12 +13,11 @@ class RecentColorsCollectionViewController: UICollectionViewController {
 
 	init() {
 		let layout = UICollectionViewFlowLayout()
-
-		let bounds = UIScreen.main.bounds
-
-		layout.itemSize = CGSize(width: bounds.width, height: 70)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
 
 		super.init(collectionViewLayout: layout)
+
+        layout.itemSize = CGSize(width: view.frame.width, height: 70)
 	}
 
     @available(*, unavailable)
@@ -26,17 +25,11 @@ class RecentColorsCollectionViewController: UICollectionViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	private var recentColors: [RecentColor]? {
-		let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as NSURL
-
-		guard let path = url.appendingPathComponent("recentColors")?.path else { return nil }
-
-		if let recentColors = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? [RecentColor] {
-			return recentColors.reversed()
-		}
-
-		return nil
-	}
+    var recentColors: [RecentColor]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -54,11 +47,17 @@ class RecentColorsCollectionViewController: UICollectionViewController {
 		blurEffectView.frame = view.bounds
 
 		view.insertSubview(blurEffectView, at: 0)
+
+        updateRecentColors()
 	}
 
 	@objc func close() {
 		dismiss(animated: true, completion: nil)
 	}
+
+    func updateRecentColors() {
+        recentColors = RecentColor.recentColors
+    }
 
 	// MARK: - UICollectionViewDataSource
 
@@ -75,4 +74,19 @@ class RecentColorsCollectionViewController: UICollectionViewController {
 
 		return cell
 	}
+
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let color = recentColors?[indexPath.item] else { return }
+
+        let alertController = UIAlertController(title: "Delete recent color?", message: nil, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+            RecentColor.remove(color)
+            self.updateRecentColors()
+        })
+
+        present(alertController, animated: true, completion: nil)
+    }
 }
