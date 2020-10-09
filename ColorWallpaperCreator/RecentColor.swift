@@ -10,25 +10,25 @@ import Foundation
 import UIKit
 
 class RecentColor: NSObject, NSCoding {
-	var color: UIColor
+    var color: UIColor
     var identifier: UUID
 
-   private init(color: UIColor?, identifier: UUID?) {
-		self.color = color ?? .white
+    private init(color: UIColor?, identifier: UUID?) {
+        self.color = color ?? .white
         self.identifier = identifier ?? UUID()
-	}
+    }
 
-	required convenience init?(coder aDecoder: NSCoder) {
-		let color = aDecoder.decodeObject(forKey: "color") as? UIColor
+    required convenience init?(coder aDecoder: NSCoder) {
+        let color = aDecoder.decodeObject(forKey: "color") as? UIColor
         let identifier = aDecoder.decodeObject(forKey: "identifier") as? UUID
 
         self.init(color: color, identifier: identifier)
-	}
+    }
 
-	func encode(with aCoder: NSCoder) {
-		aCoder.encode(color, forKey: "color")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(color, forKey: "color")
         aCoder.encode(identifier, forKey: "identifier")
-	}
+    }
 
     static func save(_ color: UIColor) {
         let recentColor = RecentColor(color: color, identifier: UUID())
@@ -57,7 +57,7 @@ class RecentColor: NSObject, NSCoding {
         }
     }
 
-   private static var recentColorsUrl: URL {
+    private static var recentColorsUrl: URL {
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let newUrl = url.appendingPathComponent("recentColors")
         return newUrl

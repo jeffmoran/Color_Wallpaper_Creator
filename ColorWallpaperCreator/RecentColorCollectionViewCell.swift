@@ -9,47 +9,47 @@
 import UIKit
 
 class RecentColorCollectionViewCell: UICollectionViewCell {
-	var recentColor: UIColor? {
-		didSet {
-			backgroundColor = recentColor ?? .white
-			hexColorCodeLabel.text = recentColor?.hexString
-			hexColorCodeLabel.textColor = recentColor?.hexTextColor
-		}
-	}
+    var recentColor: UIColor? {
+        didSet {
+            backgroundColor = recentColor ?? .white
+            hexColorCodeLabel.text = recentColor?.hexString
+            hexColorCodeLabel.textColor = recentColor?.hexTextColor
+        }
+    }
 
-	private lazy var hexColorCodeLabel: UILabel = {
-		let label = UILabel()
-		label.translatesAutoresizingMaskIntoConstraints = false
-		label.textAlignment = .center
-		label.font = UIFont.systemFont(ofSize: 18)
+    private lazy var hexColorCodeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 18)
 
-		return label
-	}()
+        return label
+    }()
 
-	convenience init() {
-		self.init(frame: .zero)
-	}
+    convenience init() {
+        self.init(frame: .zero)
+    }
 
-	override init(frame: CGRect) {
-		super.init(frame: frame)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
 
-		addSubviews()
-		setUpConstraints()
-	}
+        addSubviews()
+        setUpConstraints()
+    }
 
     @available(*, unavailable)
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-	private func addSubviews() {
-		addSubview(hexColorCodeLabel)
-	}
+    private func addSubviews() {
+        addSubview(hexColorCodeLabel)
+    }
 
-	private func setUpConstraints() {
-		NSLayoutConstraint.activate([
-			hexColorCodeLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-			hexColorCodeLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
-		])
-	}
+    private func setUpConstraints() {
+        NSLayoutConstraint.activate([
+            hexColorCodeLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            hexColorCodeLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+    }
 }
