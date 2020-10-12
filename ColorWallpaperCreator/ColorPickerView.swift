@@ -9,6 +9,9 @@
 import UIKit
 
 class ColorPickerView: UIView {
+
+    // MARK: - Private Properties
+
     private lazy var colorImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -47,9 +50,13 @@ class ColorPickerView: UIView {
         return label
     }()
 
+    // MARK: - Internal Properties
+
     var currentColor: UIColor {
         return currentColorView.backgroundColor ?? .white
     }
+
+    // MARK: - Initializers
 
     init() {
         super.init(frame: .zero)
@@ -63,6 +70,8 @@ class ColorPickerView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - Private Methods
 
     private func addSubviews() {
         addSubview(colorImageView)
@@ -103,7 +112,7 @@ class ColorPickerView: UIView {
         addGestureRecognizer(tapGesture)
     }
 
-    @objc func gestureHandler(sender: UIGestureRecognizer) {
+    @objc private func gestureHandler(sender: UIGestureRecognizer) {
         let point = sender.location(in: self)
 
         let color = colorImageView.layer.colorFromPoint(at: point)

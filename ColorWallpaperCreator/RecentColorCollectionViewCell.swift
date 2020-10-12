@@ -9,7 +9,14 @@
 import UIKit
 
 class RecentColorCollectionViewCell: UICollectionViewCell {
-    var recentColor: UIColor? {
+
+    // MARK: - Static Constants
+
+    static let reuseIdentifier: String = "recentlySavedColorCell"
+
+    // MARK: - Private Properties
+
+    private var recentColor: UIColor? {
         didSet {
             backgroundColor = recentColor ?? .white
             hexColorCodeLabel.text = recentColor?.hexString
@@ -25,6 +32,8 @@ class RecentColorCollectionViewCell: UICollectionViewCell {
 
         return label
     }()
+
+    // MARK: - Initializers
 
     convenience init() {
         self.init(frame: .zero)
@@ -42,6 +51,8 @@ class RecentColorCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Private Methods
+
     private func addSubviews() {
         addSubview(hexColorCodeLabel)
     }
@@ -51,5 +62,11 @@ class RecentColorCollectionViewCell: UICollectionViewCell {
             hexColorCodeLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
             hexColorCodeLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
+    }
+
+    // MARK: - Internal Methods
+
+    func setUpWithColor(_ color: UIColor) {
+        recentColor = color
     }
 }

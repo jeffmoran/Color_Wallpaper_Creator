@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // MARK: - Private Properties
+
     private lazy var colorPickerView: ColorPickerView = {
         let view = ColorPickerView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -32,6 +34,8 @@ class ViewController: UIViewController {
         return button
     }()
 
+    // MARK: - View Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,6 +45,8 @@ class ViewController: UIViewController {
         setUpConstraints()
         setUpNavBar()
     }
+
+    // MARK: - Private Methods
 
     private func addSubviews() {
         view.addSubview(colorPickerView)
@@ -66,19 +72,19 @@ class ViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Recent", style: .done, target: self, action: #selector(openRecentColors))
     }
 
-    @objc func openRecentColors() {
+    @objc private func openRecentColors() {
         let navController = UINavigationController(rootViewController: RecentColorsCollectionViewController())
 
         present(navController, animated: true, completion: nil)
     }
 
-    @objc func saveColorAsImage() {
+    @objc private func saveColorAsImage() {
         guard let image = colorPickerView.currentColor.saveColorAsImage() else { return }
 
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
 
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+    @objc private func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         var alertController = UIAlertController()
 
         let title: String

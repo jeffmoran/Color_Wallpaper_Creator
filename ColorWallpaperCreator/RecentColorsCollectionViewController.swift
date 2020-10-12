@@ -9,7 +9,16 @@
 import UIKit
 
 class RecentColorsCollectionViewController: UICollectionViewController {
-    private let reuseIdentifier: String = "recentlySavedColorCell"
+
+    // MARK: - Private Properties
+
+    private var recentColors: [RecentColor]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+
+    // MARK: - Initializers
 
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -25,18 +34,14 @@ class RecentColorsCollectionViewController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    var recentColors: [RecentColor]? {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Recently Saved Colors"
 
-        collectionView?.register(RecentColorCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView?.register(RecentColorCollectionViewCell.self, forCellWithReuseIdentifier: RecentColorCollectionViewCell.reuseIdentifier)
         collectionView?.alwaysBounceVertical = true
         collectionView?.backgroundColor = .clear
 
@@ -51,30 +56,38 @@ class RecentColorsCollectionViewController: UICollectionViewController {
         updateRecentColors()
     }
 
-    @objc func close() {
+    // MARK: - Private Methods
+
+    @objc private func close() {
         dismiss(animated: true, completion: nil)
     }
 
-    func updateRecentColors() {
+    private func updateRecentColors() {
         recentColors = RecentColor.recentColors
     }
+}
 
-    // MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 
+extension RecentColorsCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return recentColors?.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentColorCollectionViewCell.reuseIdentifier, for: indexPath)
 
-        if let cell = cell as? RecentColorCollectionViewCell {
-            cell.recentColor = recentColors?[indexPath.row].color
+        if let cell = cell as? RecentColorCollectionViewCell, let color = recentColors?[indexPath.row].color {
+            cell.setUpWithColor(color)
         }
 
         return cell
     }
+}
 
+// MARK: - UICollectionViewDelegate
+
+extension RecentColorsCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let color = recentColors?[indexPath.item] else { return }
 
